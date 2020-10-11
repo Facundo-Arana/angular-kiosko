@@ -1,28 +1,33 @@
 <div class="col-8">
     <table class="table">
         <thead>
-            <th><img [src]="product.image" [alt]="product.name" class="rounded mx-auto d-block" height="200px" width="300px"></th>
+            <th colspan="5">Lista de productos con materiales reciclados</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Producto</td>
-                <td>{{product.name}} </td>
-            </tr>
-            <tr>
-                <td>Material</td>
-                <td>{{product.material}}</td>
-            </tr>
-            <tr>
-                <td>Precio</td>
-                <td>{{product.price}}</td>
-            </tr>
-            <tr>
-                <td>Stock</td>
-                <td>{{product.stock}}</td>
+            <tr *ngFor="let product of products" [ngClass]="{'free': product.price == 0}">
+                <td><img [src]="product.image" [alt]="product.name" class="rounded mx-auto d-block" height="200px" width="300px"></td>
+                <td>
+                    <ul>
+                        <li>Producto:</li>
+                        <li>Material:</li>
+                        <li>Precio:</li>
+                        <li>Stock:</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>{{product.name}}</li>
+                        <li>{{product.material}}</li>
+                        <li *ngIf="product.price == 0; else showPrice">GRATIS</li>
+
+                        <ng-template #showPrice>
+                            <li>{{product.price | currency}}</li>
+                        </ng-template>
+
+                        <li>{{product.stock}}</li>
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>
-
-
-
 </div>
