@@ -1,33 +1,29 @@
-<div class="col-8">
-    <table class="table">
-        <thead>
-            <th colspan="5">Lista de productos con materiales reciclados</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of products" [ngClass]="{'free': product.price == 0}">
-                <td><img [src]="product.image" [alt]="product.name" class="rounded mx-auto d-block" height="200px" width="300px"></td>
-                <td>
-                    <ul>
-                        <li>Producto:</li>
-                        <li>Material:</li>
-                        <li>Precio:</li>
-                        <li>Stock:</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>{{product.name}}</li>
-                        <li>{{product.material}}</li>
-                        <li *ngIf="product.price == 0; else showPrice">GRATIS</li>
-
-                        <ng-template #showPrice>
-                            <li>{{product.price | currency}}</li>
-                        </ng-template>
-
-                        <li>{{product.stock}}</li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<table class="table">
+    <thead>
+        <th scope="col">Imagen</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Material</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Compra</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products" [ngClass]="{'free': product.price == 0}">
+            <td>
+                <img [src]="product.image" [alt]="product.name" class="img-small" width="100">
+            </td>
+            <td>{{product.name}}</td>
+            <td>{{product.material}} </td>
+            <td *ngIf="product.price == 0; else showPrice">GRATIS</td>
+            <ng-template #showPrice>
+                <td>{{product.price | currency}}</td>
+            </ng-template>
+            <td>{{product.stock}}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-xs" (click)="downQuantity(product)">-</button>
+                <input class="smallInput" type="number" [(ngModel)]="product.quantity" (keyup)="changeQuantity($event, product)" />
+                <button type="button" class="btn btn-primary btn-xs" (click)="upQuantity(product)">+</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

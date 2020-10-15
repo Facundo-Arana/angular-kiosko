@@ -14,7 +14,8 @@ export class ProductListComponent implements OnInit {
       material: "madera",
       price: 700,
       stock: 1,
-      image: "assets/img/mueble.png",
+      image: "assets/img/mueble.jpg",
+      quantity: 0,
     },
     {
       name: "sillones",
@@ -22,6 +23,7 @@ export class ProductListComponent implements OnInit {
       price: 700,
       stock: 1,
       image: "assets/img/silla.jpg",
+      quantity: 0,
     },
     {
       name: "bolsa",
@@ -29,8 +31,8 @@ export class ProductListComponent implements OnInit {
       price: 0,
       stock: 1,
       image: "assets/img/bolsa.jpg",
+      quantity: 0,
     },
-
   ]
 
   constructor() { }
@@ -38,4 +40,18 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  upQuantity(product: Product): void {
+    if (product.quantity <= product.stock)
+      product.quantity++;
+  }
+
+  downQuantity(product: Product): void {
+    if (product.quantity > 0)
+      product.quantity--;
+  }
+
+changeQuantity(event, product: Product){
+  //TODO
+
+  }
 }
