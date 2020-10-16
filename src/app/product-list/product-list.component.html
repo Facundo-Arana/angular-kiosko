@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table text-center">
     <thead>
         <th scope="col">Imagen</th>
         <th scope="col">Producto</th>
@@ -14,10 +14,12 @@
             </td>
             <td>{{product.name}}</td>
             <td>{{product.material}} </td>
-            <td *ngIf="product.price == 0; else showPrice">GRATIS</td>
-            <ng-template #showPrice>
-                <td>{{product.price | currency}}</td>
-            </ng-template>
+            <td>
+                <span *ngIf="product.price == 0; else showPrice"> GRATIS</span>
+                <ng-template #showPrice>
+                    <span>{{product.price | currency}}</span>
+                </ng-template>
+            </td>
             <td>{{product.stock}}</td>
             <td>
                 <button type="button" class="btn btn-primary btn-xs" (click)="downQuantity(product)">-</button>
