@@ -1,11 +1,13 @@
 <table class="table text-center">
     <thead>
-        <th scope="col">Imagen</th>
-        <th scope="col">Producto</th>
-        <th scope="col">Material</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Stock</th>
-        <th scope="col">Compra</th>
+        <tr>
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Material</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Compra</th>
+        </tr>
     </thead>
     <tbody>
         <tr *ngFor="let product of products" [ngClass]="{'free': product.price == 0}">
@@ -15,16 +17,16 @@
             <td>{{product.name}}</td>
             <td>{{product.material}} </td>
             <td>
-                <span *ngIf="product.price == 0; else showPrice"> GRATIS</span>
+                <span *ngIf="product.price == 0; else showPrice">GRATIS</span>
                 <ng-template #showPrice>
                     <span>{{product.price | currency}}</span>
                 </ng-template>
             </td>
-            <td>{{product.stock}}</td>
             <td>
-                <button type="button" class="btn btn-primary btn-xs" (click)="downQuantity(product)">-</button>
-                <input class="smallInput" type="number" [(ngModel)]="product.quantity" (keyup)="changeQuantity($event, product)" />
-                <button type="button" class="btn btn-primary btn-xs" (click)="upQuantity(product)">+</button>
+                <span class="badge badge-warning" *ngIf="product.stock == 0">SIN STOCK</span>
+            </td>
+            <td>
+                <app-input-number [(quantity)]="product.quantity" [max]="product.stock" *ngIf="product.stock"></app-input-number>
             </td>
         </tr>
     </tbody>
