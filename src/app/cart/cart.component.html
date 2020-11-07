@@ -1,1 +1,37 @@
-<p>cart works!</p>
+<h1>Changuito </h1>
+
+<div *ngIf="(cartList$ | async)?.length != 0 ; else showOtherDiv">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th> Producto</th>
+                <th> Cantidad</th>
+                <th> Precio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of cartList$ | async">
+                <td>{{product.name}}</td>
+                <td> {{product.quantity}}</td>
+                <td>{{product.price}}</td>
+                <td><button type="button" class="btn btn-sm" (click)="remove(product)">borrar</button></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">
+                    <h3>Total gastado</h3>
+                </td>
+                <td>total</td>
+            </tr>
+        </tfoot>
+
+    </table>
+</div>
+<ng-template #showOtherDiv>
+    <div>
+        <h3>No compraste nada aun</h3>
+    </div>
+</ng-template>

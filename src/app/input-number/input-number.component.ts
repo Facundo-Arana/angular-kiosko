@@ -16,7 +16,6 @@ export class InputNumberComponent implements OnInit {
   @Output()
  quantityChange: EventEmitter<number> = new EventEmitter();
 
-
   ngOnInit(): void {}
 
   upQuantity(): void {
@@ -27,8 +26,10 @@ export class InputNumberComponent implements OnInit {
   }
 
   downQuantity(): void {
-    if (this.quantity > 0) this.quantity--;
-    this.quantityChange.emit(this.quantity);
+    if (this.quantity > 0){
+      this.quantity--;
+      this.quantityChange.emit(this.quantity);
+    }
   }
 
   changeQuantity(event) {

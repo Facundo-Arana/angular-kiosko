@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Product } from '../product-list/product';
 
 @Component({
   selector: 'app-kiosko-products',
