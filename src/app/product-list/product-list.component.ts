@@ -11,6 +11,7 @@ import { Product } from './product';
 
 export class ProductListComponent implements OnInit {
 
+  // el servicio proporciona los datos a mostrar en la tabla de productos
   productList$: Observable<Product[]>;
 
   constructor(private cart: KioskoCartService) {
@@ -18,6 +19,8 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    //esto actualiza la lista de productos al navegar por el sitio
     this.cart.refresh(this.products);
   }
 
@@ -29,7 +32,7 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = [
     {
-      name: "estante",
+      name: "mueble",
       material: "madera",
       price: 700,
       stock: 1,
