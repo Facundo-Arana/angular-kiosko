@@ -9,9 +9,11 @@ export class KioskoCartService {
 
   private _cartList: Product[] = [];
   private _productList: Product[] = [];
+  private _total: number = 0;
 
   cartList: BehaviorSubject<Product[]> = new BehaviorSubject([]);
   productList: BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  total = new BehaviorSubject(0);
 
   constructor() {}
 
@@ -23,8 +25,17 @@ export class KioskoCartService {
       } else {
         item.quantity += product.quantity;
       }
+      this.calcularTotal();
       this.cartList.next(this._cartList);
     }
+  }
+
+  calcularTotal(){
+    this._total = 0;
+    this._cartList.forEach( p => {
+      this._total += (p.price * p.quantity);
+    });
+    this.total.next(this._total);
   }
 
   // borra un producto del carrito y actualiza la lista para mantener la consistencia de datos
@@ -36,6 +47,8 @@ export class KioskoCartService {
       let product = this._productList.find(v1 => item.name == v1.name);
       product.stock += item.quantity;
 
+
+      this.calcularTotal();
       this.productList.next(this._productList);
       this.cartList.next(this._cartList);
     }
